@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="image/favicon.ico">
+
+    <title>Traffic Data Refine Platform</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    
+    <style type="text/css">
+        label {max-width:none;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=F4VeNCCZnyk1zEkrXk3t2z27"></script>
+  
+
+</head>
+<body>    
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">        
+        <div class="navbar-header">          
+          <a class="navbar-brand" href="#">Traffic Data Refine Platform</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">          
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>         
+        </div>       
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active" id="Visualization"><a href="visualization.html">Visualization</a></li>           
+                    <li id="Analytics"><a href="#">Analytics</a></li>
+                    <li id="Export"><a href="#">Export</a></li>
+                    <li id="Deep"><a href="#">Deep Learning</a></li>
+                    <li id="myDiv"><a href="#"></a></li>
+                </ul>        
+            </div>       
+            
+                                 
+            <section id="content">
+                {% block content %}
+                    <p>Missing content!</p>
+                {% endblock %}
+            </section>       
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="js/jquery.datetimepicker.js"></script>
+</body>
+
+{% block map %}
+    <p>Missing content!</p>
+{% endblock %}
+
+
+</html>
