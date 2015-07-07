@@ -44,8 +44,13 @@
 	    //var marker = new BMap.Marker(point0);
 	    var myIcon = new BMap.Icon("/image/expired.png", new BMap.Size(25,25));
 	    var marker = new BMap.Marker(point0,{icon:myIcon});  // 创建标注
-	    
-	    var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+	    //map.addOverlay(marker2); 
+	     var opts = {
+	  width : 550     // 信息窗口宽度
+	      // 信息窗口高度
+	 
+	}
+	    var infoWindow = new BMap.InfoWindow(sContent,opts);  // 创建信息窗口对象
 	    
 	   
 	    

@@ -22,6 +22,7 @@ app.use(logger());
 
 // route middleware
 app.use(route.get('/', visualization));
+app.use(route.get('/visualization.html', visualization));
 app.use(route.post('/foo', foo));
 
 
