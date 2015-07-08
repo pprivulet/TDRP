@@ -17,13 +17,15 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
     
+
     <style type="text/css">
         label {max-width:none;}
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=F4VeNCCZnyk1zEkrXk3t2z27"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
-
+   
 </head>
 <body>    
     
@@ -34,7 +36,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">          
-            <li><a href="#">Profile</a></li>
+            <li><a href="#">Administor</a></li>
             <li><a href="#">Help</a></li>
           </ul>         
         </div>       
@@ -45,11 +47,9 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active" id="Visualization"><a href="visualization.html">Visualization</a></li>           
-                    <li id="Analytics"><a href="#">Analytics</a></li>
-                    <li id="History"><a href="#">Histroy</a></li>
-                    <li id="export"><a href="#">Export</a></li>
-                    <li id="myDiv"><a href="#"></a></li>
+                    <li id="visualization"><a href="visualization.html">Visualization</a></li>           
+                    <li id="analytics"><a href="analytics.html">Analytics</a></li>                   
+                    <li id="prediction"><a href="prediction.html">Prediction</a></li>                    
                 </ul>        
             </div>       
             
@@ -68,6 +68,12 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="js/jquery.datetimepicker.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/chart.js"></script>
+     <script>
+      $("#{{ ctg }}").attr('class','active');
+
+    </script>
 </body>
 
 {% block map %}

@@ -6,11 +6,11 @@
  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="row">
         <h4 class="sub-header"><strong>Traffic Data Visualization</strong></h4>
-        <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-hand-right"></span> 单击鼠标左键，拖动形成矩形框，框出目标区域后，设定时间段。</div>
+        <div class="" role="alert"><span class="small"><img style="vertical-align:middle;" src="/image/expired.png">Emergencies occur</span></div>
     </div>    
           
     <div class="row"> 
-        <div class="well" style="margin-top:-15px;height:860px;">
+        <div class="well" style="margin-top:5px;height:860px;">
             <div id="i-map" style="width: 100%; height:100%"></div>
         </div>    
     </div>
@@ -30,17 +30,18 @@
         
         
         var sContent =
+        
 	    "<div class='alert alert-warning'>" +
-	    "<h4>Event 1</h4><hr/>" + 
-	    "<div class='row'><img class='col-xs-2 col-md-4' id='imgDemo' src='http://app.baidu.com/map/images/tiananmen.jpg'  title='天安门'/>" + 
-	    "<p class='col-xs-2 col-md-4'>天安门坐落在中国北京市中心,故宫的南侧,与天安门广场隔长安街相望,是清朝皇城的大门...</p>" + 
-	    "</div></div>"+
-	    "<div class='alert alert-danger'>" +
-	    "<h4 >Event 2</h4><hr/>" + 
-	    "<div class='row'><img class='col-xs-2 col-md-4' id='imgDemo' src='http://app.baidu.com/map/images/tiananmen.jpg'  title='天安门'/>" + 
-	    "<p class='col-xs-2 col-md-4'>天安门坐落在中国北京市中心,故宫的南侧,与天安门广场隔长安街相望,是清朝皇城的大门...</p>" + 
-	    "</div></div>"
-	    var point0 = new BMap.Point(120.662445+0.0005,31.152545+0.0005);
+	    "<span class='label label-default'>Road Damage</span><hr/><h5>Location: xxx Road & xxx Road</h5><h5>2015-07-13 12:00:00</h5>" + 
+	    "<img  id='imgDemo' height=220 widht=220 src='/image/crack.png'/>" + 
+	    "<div style='margin-top:10px;'><div class='btn-group'><button type='button' class='btn   btn-xs btn-success'>Info. Dep</button><button type='button' class='btn  btn-xs btn-success'>Info. FM</button><button type='button' class='btn  btn-xs btn-success'>Info. SNS</button><button type='button' class='btn  btn-xs btn-success'>Clear</button></div></div>" + 
+	    "</div>"
+	   
+	    
+	    
+	    
+	    
+	    var point0 = new BMap.Point(120.662445+0.0006,31.152545+0.0006);
 	    //var marker = new BMap.Marker(point0);
 	    var myIcon = new BMap.Icon("/image/expired.png", new BMap.Size(25,25));
 	    var marker = new BMap.Marker(point0,{icon:myIcon});  // 创建标注
@@ -57,7 +58,15 @@
 		        infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
 	        }
 	    });
-	    var points =[{"lng":120.662445,"lat":31.152545,"count":50},{"lng":120.652445,"lat":31.152545,"count":50}]
+	    
+	    
+	    
+	    
+	    var points =[
+	      {"lng":120.662445,"lat":31.152545,"count":50},
+	      {"lng":120.644519,"lat":31.144985,"count":100},
+	      {"lng":120.658362,"lat":31.162345,"count":30},
+	      {"lng":120.670867,"lat":31.144807,"count":80}]
 	    heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":50});
 	    map.addOverlay(heatmapOverlay);
 	    heatmapOverlay.setDataSet({data:points,max:100});

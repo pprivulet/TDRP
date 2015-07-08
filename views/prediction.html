@@ -1,0 +1,140 @@
+﻿{% extends 'layout.html' %}
+
+
+
+{% block content %}
+ <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="row">
+        <h4 class="sub-header"><strong>Traffic Jam Prediction</strong></h4>
+        <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-hand-right"></span>Click mouse left button, drag to select area and then setup the time peroid to predict.</div>
+    </div>
+         
+    <div class="row">             
+        <button type="button" class="btn btn-info hidden" data-toggle="modal" data-target="#myModal1" id="setup">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Time Period
+        </button>
+
+                <!-- Modal -->
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Time Period Setup</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="datetimepicker-start">Start at:</label>
+                            <input type="text" class="form-control" id="datetimepicker-start" placeholder="Choose start time point">
+                        </div>
+                        <div class="form-group">
+                            <label for="datetimepicker-end">End at:</label>
+                            <input type="text" class="form-control" id="datetimepicker-end" placeholder="Choose end time point">
+                        </div>
+                      
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="modal-close" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="modal-ok" class="btn btn-primary" onClick="foo();">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- Modal --> 
+    </div>
+          
+          
+    <div class="row"> 
+        <div class="well" style="margin-top:-15px;height:860px;">
+            <div id="i-map" style="width: 100%; height:100% "></div>
+        </div>    
+    </div>
+</div>
+{% endblock %}
+
+{% block map %}
+    <script type="text/javascript">
+        
+        
+  
+        var map = new BMap.Map("i-map");      //设置卫星图为底图
+        var point = new BMap.Point(120.645,31.144);
+        map.centerAndZoom(point,16);//设定地图的中心点和坐标并将地图显示在地图容器中
+        map.addControl(new BMap.NavigationControl());      //为地图添加鱼骨  
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩
+
+        var status = 0;
+        var startx = "", starty = "", endx = "", endy = "";
+        var a1="";
+        var b1="";
+        var a2="";
+        var b2="";
+        var polygon="";
+
+        map.addEventListener("click", function(e){    
+            if(status == 2){
+                map.removeOverlay(polygon);
+                polygon="";            
+                status = 0;                         
+            } else if(status == 1){
+                status = 2;
+                endx = e.point.lng;
+                endy = e.point.lat;                
+                $('#datetimepicker-start').datetimepicker({step:10});
+                $('#datetimepicker-end').datetimepicker({step:10});
+                $('#setup').click();        
+                return;
+            } else {
+                status = 1;
+                startx = e.point.lng;
+                starty = e.point.lat;  
+                a1 = startx;
+                b1 = starty;
+            } 
+        }); 
+        
+        map.addEventListener("mousemove", function(e){ 
+            if(status==1){
+                if(polygon!=""){
+                    map.removeOverlay(polygon);
+                    polygon="";
+                }
+                a2=e.point.lng;
+                b2=e.point.lat;        
+                polygon = new BMap.Polygon([
+                  new BMap.Point(a1,b1),
+                  new BMap.Point(a2,b1),
+                  new BMap.Point(a2,b2),
+                  new BMap.Point(a1,b2)
+                ], {strokeColor:"#4863A0", strokeWeight:4, strokeOpacity:0.7, fillOpacity:0.1});       
+                map.addOverlay(polygon);		
+            } 
+        });
+
+        function foo(){
+            $('#modal-close').click();
+            htmlobj=$.ajax({                
+                url:"foo",
+                method: "post",
+                data: { startx:startx, 
+                        starty:starty,
+                        endx:endx,
+                        endy:endy,
+                        startAt:$('#datetimepicker-start').val(),
+                        endAt:$('#datetimepicker-end').val()},
+                async:false,
+                success: function(){
+                    polygon = new BMap.Polygon([
+                      new BMap.Point(startx,starty),
+                      new BMap.Point(endx,endy)                      
+                    ], {strokeColor:"#4863A0", strokeWeight:4, strokeOpacity:0.7, fillOpacity:0.1});       
+                    map.addOverlay(polygon);
+                }
+                
+            });
+            
+            
+        }
+        
+    </script> 
+{% endblock %}

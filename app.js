@@ -23,7 +23,8 @@ app.use(logger());
 // route middleware
 app.use(route.get('/', visualization));
 app.use(route.get('/visualization.html', visualization));
-app.use(route.post('/foo', foo));
+app.use(route.get('/analytics.html', analytics));
+app.use(route.get('/prediction.html', prediction));
 
 
 //Specifying Swig view engine
@@ -38,6 +39,13 @@ function *visualization(next) {
   this.body = yield render('visualization', { ctg: "visualization" });
 }
 
+function *analytics(next) {   
+  this.body = yield render('analytics', { ctg: "analytics" });
+}
+
+function *prediction(next) {   
+  this.body = yield render('prediction', { ctg: "prediction" });
+}
 
 function *foo(res) {
   var data =  yield parse(this);
