@@ -21,20 +21,26 @@ app.use(publicFiles);
 app.use(logger());
 
 // route middleware
-app.use(route.get('/', visualization));
+app.use(route.get('/', snapshot));
+app.use(route.get('/snapshot.html', snapshot));
 app.use(route.get('/visualization.html', visualization));
 app.use(route.get('/analytics.html', analytics));
 app.use(route.get('/prediction.html', prediction));
-
+app.use(route.get('/login.html', login));
 
 //Specifying Swig view engine
 var render= views(__dirname + '/views', { map: { html: 'swig' }});
 
 // route definitions
 
-/**
- * user item List.
- */
+function *snapshot(next){   
+  this.body = yield render('snapshot', { ctg: "snapshot" });
+}
+
+function *login(next) {   
+  this.body = yield render('login', { ctg: "login" });
+}
+
 function *visualization(next) {   
   this.body = yield render('visualization', { ctg: "visualization" });
 }

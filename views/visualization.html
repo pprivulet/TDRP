@@ -5,15 +5,16 @@
 {% block content %}
  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="row">
-        <h4 class="sub-header"><strong>Traffic Data Visualization</strong></h4>
-        <div class="" role="alert"><span class="small"><img style="vertical-align:middle;" src="/image/expired.png">Emergencies occur</span></div>
+        <h4 class="sub-header"><strong>交通数据可视化</strong></h4>
+        <div class="" role="alert"><span class="small"><img style="vertical-align:middle;" src="/image/expired.png">异常事件</span></div>
     </div>    
           
     <div class="row"> 
-        <div class="well" style="margin-top:5px;height:860px;">
+        <div class="well" style="margin-top:5px;height:760px;">
             <div id="i-map" style="width: 100%; height:100%"></div>
         </div>    
     </div>
+	
 </div>
 {% endblock %}
 
@@ -32,7 +33,7 @@
         var sContent =
         
 	    "<div class='alert alert-warning'>" +
-	    "<span class='label label-default'>Road Damage</span><hr/><h5>Location: xxx Road & xxx Road</h5><h5>2015-07-13 12:00:00</h5>" + 
+	    "<span class='label label-default'>道路破坏</span><hr/><h5>地址: xxx 路 & xxx 路</h5><h5>2015-07-13 12:00:00</h5>" + 
 	    "<img  id='imgDemo' height=220 widht=220 src='/image/crack.png'/>" + 
 	    "<div style='margin-top:10px;'><div class='btn-group'><button type='button' class='btn   btn-xs btn-success'>Info. Dep</button><button type='button' class='btn  btn-xs btn-success'>Info. FM</button><button type='button' class='btn  btn-xs btn-success'>Info. SNS</button><button type='button' class='btn  btn-xs btn-success'>Clear</button></div></div>" + 
 	    "</div>"
