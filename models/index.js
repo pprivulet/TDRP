@@ -8,15 +8,11 @@ function load(name) {
 }
 
 var User = load('user');
-var Password = load('password');
-var Postcode = load('postcode');
-User.hasOne(Password);
-User.hasOne(Postcode);
-
+var GPS = load('gps');
 
 module.exports = {
   sequelize: sequelize,
   User: User,
-  Password: Password
+  GPS: GPS  
 };
 

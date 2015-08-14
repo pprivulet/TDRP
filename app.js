@@ -10,6 +10,8 @@ var path = require('path');
 
 var koa = require('koa');
 var app = koa();
+var models = require('./models');
+
 
 var publicFiles = static(path.join(__dirname, '/public'));
 
@@ -27,18 +29,63 @@ app.use(route.get('/visualization.html', visualization));
 app.use(route.get('/analytics.html', analytics));
 app.use(route.get('/prediction.html', prediction));
 app.use(route.get('/login.html', login));
+app.use(route.post('/_gps', _gps));
+app.use(route.get('/_gpsNO', _gpsNO));
+app.use(route.post('/login', _login));
 
 //Specifying Swig view engine
 var render= views(__dirname + '/views', { map: { html: 'swig' }});
 
 // route definitions
 
+
+function *_gps(next){
+  body = yield parse(this);
+  console.log(body);  
+  var gps = yield models.GPS.findById(body.id); 
+  this.body = {     
+    gps: gps 
+  };
+}
+
+function *_gpsNO(next){ 
+  var gpsList = yield models.GPS.findAll(); 
+  this.body = {     
+    no: gpsList.length 
+  };
+}
+
+
 function *snapshot(next){   
-  this.body = yield render('snapshot', { ctg: "snapshot" });
+  this.body = yield render('snapshot', { ctg: "snapshot"});
 }
 
 function *login(next) {   
   this.body = yield render('login', { ctg: "login" });
+}
+
+function *_login(next) {
+  body = yield parse(this);
+  var username = body.username;
+  var password = body.password;
+  this.body = {
+    status:'Forbidden'            
+  };
+  var admin = yield models.User.findByUsername(username);
+  if(admin){
+      if(password===admin.password){
+         this.body = {
+            status:'Authed'            
+         };
+         return;         
+      }      
+  }
+  
+  
+  
+  
+  
+  
 }
 
 function *visualization(next) {   

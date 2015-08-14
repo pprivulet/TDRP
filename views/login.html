@@ -51,13 +51,12 @@
     </nav>
     
     <div class="container">
-
-      <form class="form-signin">
+      <form class="form-signin" method="post" action="/login">
         <h2 class="form-signin-heading">管理员登录</h2>
         <label for="inputEmail" class="sr-only">账号</label>
-        <input type="username" maxlength="16" id="inputUsername"  class="form-control" placeholder="请输入账号" required autofocus>
+        <input type="username" maxlength="16" id="inputUsername"  name="username" class="form-control" placeholder="请输入账号" required autofocus>
         <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" maxlength="16" id="inputPassword"  class="form-control" placeholder="请输入密码" required>
+        <input type="password" maxlength="16" id="inputPassword"  name="password" class="form-control" placeholder="请输入密码" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> 记住我

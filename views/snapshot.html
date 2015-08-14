@@ -6,6 +6,7 @@
  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="row">
         <h4 class="sub-header"><strong>路况实时快照</strong></h4>       
+        <div class="" role="alert"><span class="small"><img style="vertical-align:middle;" src="/image/snapshot.png">点击查看路况快照</span></div>
     </div>    
           
     <div class="row"> 
@@ -14,6 +15,8 @@
         </div>    
     </div>
 	
+    
+   
 </div>
 {% endblock %}
 
@@ -22,74 +25,70 @@
   
         var map = new BMap.Map("i-map");      //设置卫星图为底图
         var point = new BMap.Point(120.645,31.144);
-        map.centerAndZoom(point,16);//设定地图的中心点和坐标并将地图显示在地图容器中
+        map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
         map.addControl(new BMap.NavigationControl());      //为地图添加鱼骨  
         map.enableScrollWheelZoom();//启用地图滚轮放大缩
-
+        var img = "/image/t2.png";
+        var h = 30;
+        var w = 30;
+        //var point = null;	    
+	    //var myIcon = null;
+	    //var marker = null;  // 创建标注
+        //var infoWindow = null;  // 创建信息窗口对象
+        //var points = [];
         
         
         
-        var sContent =
         
-	    "<div class='alert alert-warning'>" +
-	    "<span class='label label-default'>快照</span><hr/><h5>地址: xxx 路 & xxx 路</h5><h5>2015-07-13 12:00:00</h5>" + 
-	    "<img  id='imgDemo' height=220 widht=220 src='/image/crack.png'/>" + 
-	    "</div>"
-	   
-	    
-	    
-	    img = "/image/target.png";
-	    h = 50;
-        w = 50;
+        $.get("/_gpsNO", function(data,status){
+            if(status==="success"){
+              var no = data.no;
+              console.log(no);
+              
+              for(var i=1;i<=no;i++){
+                $.post("/_gps",{id:i},function(data, status){                    
+                    var sContent =        
+                      "<div class='alert alert-warning'>" +        
+                      "<h4><span class='label label-default'> 快照 </span></h4><hr/>"+
+                      "<h5>地点：<label id='location'>"+
+                      data.gps.name+
+                      "</label></h5>"+
+                      "<h5>时间:<label id='time'>"+
+                      new Date()+
+                      "</label></h5>"+ 
+                      "<img  id='imgDemo' height=220 widht=220 src='/image/crack.png'/>" + 
+                      "</div>"
+                    var point = new BMap.Point(data.gps.longitude, data.gps.latitude);	    
+                    var myIcon = new BMap.Icon(img, new BMap.Size(h,w));
+                    var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+                    var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+                    map.addOverlay(marker);
+                    marker.addEventListener("click", function(){       
+                      this.openInfoWindow(infoWindow);
+                      //d = new Date();        
+                      //$('#time').html(d);
+                      $('#imgDemo').attr('src','/image/crack.png?'+d.getTime());
+                        document.getElementById('imgDemo').onload = function (){                
+		                infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+                      }
+                    });
+                });
+              
+              
+              }
+              
+              
+              
+              
+            } else {}
+        });
+       
+            
+     
         
-	    var point0 = new BMap.Point(120.662445,31.152545);
-	    //var marker = new BMap.Marker(point0);
-	    var myIcon0 = new BMap.Icon(img, new BMap.Size(h,w));
-	    var marker0 = new BMap.Marker(point0,{icon:myIcon0});  // 创建标注
         
         
-        var point1 = new BMap.Point(120.644519,31.144985);
-	    //var marker = new BMap.Marker(point0);
-	    var myIcon1 = new BMap.Icon(img, new BMap.Size(h,w));
-	    var marker1 = new BMap.Marker(point1,{icon:myIcon1});  // 创建标注
         
-        
-        var point2 = new BMap.Point(120.658362,31.162345);
-	    //var marker = new BMap.Marker(point0);
-	    var myIcon2 = new BMap.Icon(img, new BMap.Size(h,w));
-	    var marker2 = new BMap.Marker(point2,{icon:myIcon2});  // 创建标注
-        
-        
-        var point3 = new BMap.Point(120.670867,31.144807);
-	    //var marker = new BMap.Marker(point0);
-	    var myIcon3 = new BMap.Icon(img, new BMap.Size(h,w));
-	    var marker3 = new BMap.Marker(point3,{icon:myIcon3});  // 创建标注
-	    
-	    var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
-	      
-	    map.addOverlay(marker0);
-        map.addOverlay(marker1);
-        map.addOverlay(marker2);
-        map.addOverlay(marker3);
-        
-	    marker0.addEventListener("click", function(){          
-	        this.openInfoWindow(infoWindow);
-	        //图片加载完毕重绘infowindow
-	        document.getElementById('imgDemo').onload = function (){
-		        infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
-	        }
-	    });
-	    
-	     
-	    var points =[
-	      {"lng":120.662445,"lat":31.152545,"count":50},
-	      {"lng":120.644519,"lat":31.144985,"count":50},
-	      {"lng":120.658362,"lat":31.162345,"count":50},
-	      {"lng":120.670867,"lat":31.144807,"count":50}]
-	    heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":30});
-	    map.addOverlay(heatmapOverlay);
-	    heatmapOverlay.setDataSet({data:points,max:100});
-	    heatmapOverlay.show();
 	    
 	    
         

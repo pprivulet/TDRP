@@ -2,29 +2,22 @@
 
 module.exports = function(sequelize, Sequelize){
     return sequelize.define('user',{
-      firstName: {
+      userName: {
         type: Sequelize.STRING    
       },
-      lastName: {
+      password: {
         type: Sequelize.STRING
-      },
-      emailAddress: {
-        type:  Sequelize.STRING,
-        validate : {
-          isEmail: {
-              msg: "Must be email Address"
-          }    
-        }        
-      }      
+      }           
     },{
         classMethods:{
-            getAll: function*(){
-                console.log(1)
+            getAll: function*(){                
                 return yield this.findAll();
             },
-            findById: function*(id) {
-                console.log(id);
+            findById: function*(id) {                
                 return yield this.find({where:{id:id}});
+            },
+            findByUsername: function*(userName) {                
+                return yield this.find({where:{userName:userName}});
             },
             add: function*(user){
                 var row = this.build(user);
