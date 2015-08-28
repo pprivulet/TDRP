@@ -31,6 +31,10 @@
         var img = "/image/t2.png";
         var h = 30;
         var w = 30;
+        var m_szUserPwdValue = Base64.encode("admin" + ":" + "ygc123");
+                            
+        var url="http://58.210.217.85:40010/SDK/play/100/004"
+        //HWP = new Plugin(1, m_szHostName, g_szHttpPort, m_lRtspPort);
         //var point = null;	    
 	    //var myIcon = null;
 	    //var marker = null;  // 创建标注
@@ -43,7 +47,9 @@
         $.get("/_gpsNO", function(data,status){
             if(status==="success"){
               var no = data.no;
-              console.log(no);
+              
+              
+              
               
               for(var i=1;i<=no;i++){
                 $.post("/_gps",{id:i},function(data, status){                    
@@ -55,8 +61,8 @@
                       "</label></h5>"+
                       "<h5>时间:<label id='time'>"+
                       new Date()+
-                      "</label></h5>"+ 
-                      "<img  id='imgDemo' height=220 widht=220 src='/image/crack.png'/>" + 
+                      "</label></h5>"+                       
+                      "<div id='imgDemo' style='width: 277px; height: 200px;' ><embed type='application/hwp-webvideo-plugin' id='PreviewActiveX' width='100%' height='100%' name='PreviewActiveX' align='center' wndtype='1' playmode='normal'></div>"+
                       "</div>"
                     var point = new BMap.Point(data.gps.longitude, data.gps.latitude);	    
                     var myIcon = new BMap.Icon(img, new BMap.Size(h,w));
@@ -67,9 +73,21 @@
                       this.openInfoWindow(infoWindow);
                       //d = new Date();        
                       //$('#time').html(d);
-                      $('#imgDemo').attr('src','/image/crack.png?'+d.getTime());
-                        document.getElementById('imgDemo').onload = function (){                
+                      //$('#imgDemo').attr('src','/image/crack.png?'+d.getTime());
+                      var m_PreviewOCX = document.getElementById("PreviewActiveX");
+                      if (m_PreviewOCX.HWP_Play(url, m_szUserPwdValue, 0, "", "") != 0) {		
+                          var iError = m_PreviewOCX.HWP_GetLastError();      
+                          console.log(iError);
+	
+                      }
+                      document.getElementById('imgDemo').onload = function (){                
 		                infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+                        var m_PreviewOCX = document.getElementById("PreviewActiveX");
+                        if (m_PreviewOCX.HWP_Play(url, m_szUserPwdValue, 0, "", "") != 0) {		
+                          var iError = m_PreviewOCX.HWP_GetLastError();      
+                          console.log(iError);
+	
+                        }
                       }
                     });
                 });
