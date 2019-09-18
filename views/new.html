@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}New User{% endblock %}
+
+{% block content %}
+  <h1>Add User</h1>
+  <p>Create a new User</p>
+  <form action="/user/create" method="post">
+    <p><input type="text" placeholder="First name" name="firstName"></p>
+    <p><input type="text" placeholder="Last name" name="lastName"></p>
+    <p><input type="text" placeholder="Email Address" name="emailAddress"></p>
+    <p><input type="submit" value="Create"></p>
+  </form>
+{% endblock %}

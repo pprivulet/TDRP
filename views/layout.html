@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="image/favicon.ico">
+
+    <title>交通视频感知平台</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    
+
+    <style type="text/css">
+        label {max-width:none;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=F4VeNCCZnyk1zEkrXk3t2z27"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    
+   
+</head>
+<body>    
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">        
+        <div class="navbar-header">          
+          <a class="navbar-brand" href="#">交通视频感知平台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">  
+            <li><a href="#">Administrator</a></li>          
+            <li><a href="#">退出</a></li>			
+          </ul>         
+        </div>       
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li id="snapshot"><a href="snapshot.html">路况快照</a></li> 
+                    <li id="visualization"><a href="visualization.html">数据可视化</a></li>           
+                    <li id="analytics"><a href="analytics.html">统计分析</a></li>                   
+                    <li id="prediction"><a href="prediction.html">交通流预测</a></li>                    
+                </ul>        
+            </div>       
+            
+                                 
+            <section id="content">
+                {% block content %}
+                    <p>Missing content!</p>
+                {% endblock %}
+            </section>       
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="js/jquery.datetimepicker.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/chart.js"></script>
+    <script type="application/javascript" src="js/Plugin.js"></script>
+    <script type="application/javascript" src="js/common.js"></script>
+    <script type="application/javascript" src="js/preview.js"></script>
+    <script type="application/javascript" src="js/main.js"></script>
+     <script>
+      $("#{{ ctg }}").attr('class','active');
+
+    </script>
+</body>
+
+{% block map %}
+    <p>Missing content!</p>
+{% endblock %}
+
+
+</html>

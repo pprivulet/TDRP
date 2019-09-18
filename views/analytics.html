@@ -1,0 +1,83 @@
+﻿{% extends 'layout.html' %}
+
+
+
+{% block content %}
+ <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="row">
+        <h4 class="sub-header"><strong>交通数据统计与分析</strong></h4>        
+    </div>    
+          
+    <div class="row"> 
+        <h4><span class='label label-default'>交通堵塞柱状图</span></h4>
+        <div class="input-group col-sm-3">            
+            <input type="text" class="form-control" id="datetimepicker-start" placeholder="选择日期">
+            <span class="input-group-addon" id="sizing-addon2">GO</span>
+        </div>
+        
+        <div style="padding-left:20px;padding-top:20px;">
+        <canvas  id="myChart" width="1300" height="600"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block map%}
+<script>
+var data = {
+    labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,10,10,9]
+        },
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,220,205,0.2)",
+            strokeColor: "rgba(151,220,205,1)",
+            pointColor: "rgba(151,220,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [28, 48, 40, 19, 86, 27, 90,65, 59, 80, 81, 56,65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81,1]
+        },
+        {
+            label: "My Third dataset",
+            fillColor: "rgba(120,220,220,0.2)",
+            strokeColor: "rgba(120,220,220,1)",
+            pointColor: "rgba(120,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [5, 9, 12, 21, 44, 11, 55, 11, 28, 8, 23, 22, 55, 33, 66,88, 28, 8, 23, 22, 55, 33, 66,88]
+        },
+        {
+            label: "My Forth dataset",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [28, 8, 23, 22, 55, 33, 66,88, 5, 9, 12, 21, 44, 11, 55, 11,5, 9, 12, 21, 44, 11, 55, 11]
+        }
+    ]
+};
+
+
+
+var ctx = document.getElementById("myChart").getContext("2d");
+var myLineChart = new Chart(ctx).Line(data);
+
+$('#datetimepicker-start').datepicker();
+
+</script>
+
+{% endblock %}
+

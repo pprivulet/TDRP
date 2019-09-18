@@ -1,0 +1,79 @@
+﻿{% extends 'layout.html' %}
+
+
+
+{% block content %}
+ <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="row">
+        <h4 class="sub-header"><strong>交通数据可视化</strong></h4>
+        <div class="" role="alert"><span class="small"><img style="vertical-align:middle;" src="/image/expired.png">异常事件</span></div>
+    </div>    
+          
+    <div class="row"> 
+        <div class="well" style="margin-top:5px;height:760px;">
+            <div id="i-map" style="width: 100%; height:100%"></div>
+        </div>    
+    </div>
+	
+</div>
+{% endblock %}
+
+{% block map %}
+    <script type="text/javascript">      
+  
+        var map = new BMap.Map("i-map");      //设置卫星图为底图
+        var point = new BMap.Point(120.645,31.144);
+        map.centerAndZoom(point,16);//设定地图的中心点和坐标并将地图显示在地图容器中
+        map.addControl(new BMap.NavigationControl());      //为地图添加鱼骨  
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩
+
+        
+        
+        
+        var sContent =
+        
+	    "<div class='alert alert-warning'>" +
+	    "<span class='label label-default'>道路破坏</span><hr/><h5>地址: xxx 路 & xxx 路</h5><h5>2015-07-13 12:00:00</h5>" + 
+	    "<img  id='imgDemo' height=220 widht=220 src='/image/crack.png'/>" + 
+	    "<div style='margin-top:10px;'><div class='btn-group'><button type='button' class='btn   btn-xs btn-success'>Info. Dep</button><button type='button' class='btn  btn-xs btn-success'>Info. FM</button><button type='button' class='btn  btn-xs btn-success'>Info. SNS</button><button type='button' class='btn  btn-xs btn-success'>Clear</button></div></div>" + 
+	    "</div>"
+	   
+	    
+	    
+	    
+	    
+	    var point0 = new BMap.Point(120.662445+0.0006,31.152545+0.0006);
+	    //var marker = new BMap.Marker(point0);
+	    var myIcon = new BMap.Icon("/image/expired.png", new BMap.Size(25,25));
+	    var marker = new BMap.Marker(point0,{icon:myIcon});  // 创建标注
+	    
+	    var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+	    
+	   
+	    
+	    map.addOverlay(marker);
+	    marker.addEventListener("click", function(){          
+	        this.openInfoWindow(infoWindow);
+	        //图片加载完毕重绘infowindow
+	        document.getElementById('imgDemo').onload = function (){
+		        infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+	        }
+	    });
+	    
+	    
+	    
+	    
+	    var points =[
+	      {"lng":120.662445,"lat":31.152545,"count":50},
+	      {"lng":120.644519,"lat":31.144985,"count":100},
+	      {"lng":120.658362,"lat":31.162345,"count":30},
+	      {"lng":120.670867,"lat":31.144807,"count":80}]
+	    heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":50});
+	    map.addOverlay(heatmapOverlay);
+	    heatmapOverlay.setDataSet({data:points,max:100});
+	    heatmapOverlay.show();
+	    
+	    
+        
+    </script> 
+{% endblock %}

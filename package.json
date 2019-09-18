@@ -1,0 +1,22 @@
+{
+  "name": "koa-CRUD",
+  "description": "Basic CRUD demo with Koa.js",
+  "author": "shijuvar",
+  "version": "0.0.1",
+  "repository": "https://github.com/shijuvar/koa-CRUD",
+  "dependencies": {
+    "co-body": ">=0.0.1",
+    "co-views": ">=0.1.0",
+    "koa": ">=0.2.0",
+    "koa-body-parser": "^1.1.1",
+    "koa-logger": ">=1.1.0",
+    "koa-route": ">=1.0.2",
+    "koa-static": "^1.4.9",
+    "mysql": "^2.5.5",
+    "sequelize": "^2.0.6",
+    "swig": ">=1.2.2"
+  },
+  "engines": {
+    "node": ">= 0.11.9"
+  }
+}
